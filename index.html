@@ -63,22 +63,27 @@
 
     <script>
         function updateClock() {
-            const now = new Date();
-            const tokyoTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tokyo"}));
-            
-            const year = tokyoTime.getFullYear();
-            const month = String(tokyoTime.getMonth() + 1).padStart(2, '0');
-            const day = String(tokyoTime.getDate()).padStart(2, '0');
-            const hours = String(tokyoTime.getHours()).padStart(2, '0');
-            const minutes = String(tokyoTime.getMinutes()).padStart(2, '0');
-            const seconds = String(tokyoTime.getSeconds()).padStart(2, '0');
-            
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-            document.getElementById('date').textContent = `${year}/${month}/${day}`;
+        const now = new Date();
+        const tokyoTime = new Date(
+            now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
+        );
+
+        const year = tokyoTime.getFullYear();
+        const month = String(tokyoTime.getMonth() + 1).padStart(2, '0');
+        const day = String(tokyoTime.getDate()).padStart(2, '0');
+        const hours = String(tokyoTime.getHours()).padStart(2, '0');
+        const minutes = String(tokyoTime.getMinutes()).padStart(2, '0');
+
+        // 曜日を英語略語で取得
+        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const weekday = weekdays[tokyoTime.getDay()];
+
+        document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        document.getElementById('date').textContent = `${year}/${month}/${day} ${weekday}`;
         }
-        
+
         updateClock();
-        setInterval(updateClock, 1000); // 1秒ごとに更新
+        setInterval(updateClock, 1000);
     </script>
 </body>
 </html>
